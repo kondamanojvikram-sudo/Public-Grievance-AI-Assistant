@@ -34,23 +34,23 @@
       </a>
 
       <nav class="main-nav" role="navigation" aria-label="Main Navigation">
-        <a href="/">{{ t('nav_home', lang) }}</a>
-        <a href="/services">{{ t('nav_services', lang) }}</a>
-        <a href="/faqs">{{ t('nav_faqs', lang) }}</a>
-        <a href="/chat">{{ t('nav_chat', lang) }}</a>
-        <a href="/grievance/new" class="btn btn-sm btn-primary" style="color: #fff !important;">{{ t('nav_grievance', lang) }}</a>
-        <a href="/track">{{ t('nav_track', lang) }}</a>
+        <a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}" {% if request.url.path == '/' %}aria-current="page"{% endif %}>{{ t('nav_home', lang) }}</a>
+        <a href="/services" class="nav-link {% if request.url.path.startswith('/services') %}active{% endif %}" {% if request.url.path.startswith('/services') %}aria-current="page"{% endif %}>{{ t('nav_services', lang) }}</a>
+        <a href="/faqs" class="nav-link {% if request.url.path.startswith('/faqs') %}active{% endif %}" {% if request.url.path.startswith('/faqs') %}aria-current="page"{% endif %}>{{ t('nav_faqs', lang) }}</a>
+        <a href="/chat" class="nav-link {% if request.url.path.startswith('/chat') %}active{% endif %}" {% if request.url.path.startswith('/chat') %}aria-current="page"{% endif %}>{{ t('nav_chat', lang) }}</a>
+        <a href="/grievance/new" class="nav-link nav-link-grievance {% if request.url.path.startswith('/grievance') %}active{% endif %}" {% if request.url.path.startswith('/grievance') %}aria-current="page"{% endif %}>{{ t('nav_grievance', lang) }}</a>
+        <a href="/track" class="nav-link {% if request.url.path.startswith('/track') %}active{% endif %}" {% if request.url.path.startswith('/track') %}aria-current="page"{% endif %}>{{ t('nav_track', lang) }}</a>
 
         {% if request.session.get('user_id') %}
           {% if request.session.get('user_role') == 'staff' %}
-            <a href="/admin" style="font-weight: 700; color: #1e3a8a;">{{ t('nav_admin', lang) }}</a>
+            <a href="/admin" class="nav-link {% if request.url.path.startswith('/admin') %}active{% endif %}" {% if request.url.path.startswith('/admin') %}aria-current="page"{% endif %} style="font-weight: 700; color: #1e3a8a;">{{ t('nav_admin', lang) }}</a>
           {% else %}
-            <a href="/dashboard">{{ t('nav_dashboard', lang) }}</a>
+            <a href="/dashboard" class="nav-link {% if request.url.path.startswith('/dashboard') %}active{% endif %}" {% if request.url.path.startswith('/dashboard') %}aria-current="page"{% endif %}>{{ t('nav_dashboard', lang) }}</a>
           {% endif %}
-          <a href="/logout" style="color: #991b1b;">{{ t('nav_logout', lang) }}</a>
+          <a href="/logout" class="nav-link" style="color: #991b1b;">{{ t('nav_logout', lang) }}</a>
         {% else %}
-          <a href="/login">{{ t('nav_login', lang) }}</a>
-          <a href="/register">{{ t('nav_register', lang) }}</a>
+          <a href="/login" class="nav-link {% if request.url.path.startswith('/login') %}active{% endif %}" {% if request.url.path.startswith('/login') %}aria-current="page"{% endif %}>{{ t('nav_login', lang) }}</a>
+          <a href="/register" class="nav-link {% if request.url.path.startswith('/register') %}active{% endif %}" {% if request.url.path.startswith('/register') %}aria-current="page"{% endif %}>{{ t('nav_register', lang) }}</a>
         {% endif %}
 
         <!-- Language Switcher Form -->
