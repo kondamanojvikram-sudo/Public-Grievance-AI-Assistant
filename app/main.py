@@ -7,7 +7,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import HTMLResponse
 
 from app.auth import SECRET_KEY
-from app.db import init_db, seed_data
+from app.db import DB_PATH, init_db, seed_data
 from app.retrieval import get_retriever
 from app.i18n import t, get_lang_from_request
 
@@ -27,6 +27,15 @@ if os.getenv("VERCEL"):
 else:
     UPLOADS_DIR = BASE_DIR / "uploads"
 UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+
+# Initialize DB & Seed Sample Data if not already present
+try:
+    if not DB_PATH.exists():
+        init_db()
+        seed_data()
+        get_retriever()
+except Exception:
+    pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -76,10 +85,9 @@ async def custom_404_handler(request: Request, exc):
     lang = get_lang_from_request(request)
     return templates.TemplateResponse(
         request=request,
-        name="base.html",
+        name="404.html",
         context={
             "lang": lang,
-            "content_override": True,
             "t": t
         },
         status_code=404
