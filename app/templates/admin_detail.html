@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Review Grievance {{ grievance.reference }} - Staff Queue{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 16px;">
+  <a href="/admin" style="font-weight: 600; text-decoration: none;">&larr; Back to Staff Queue</a>
+</div>
+
+<div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: start;">
+  <!-- Left Column: Grievance Details & Timeline -->
+  <div>
+    <div class="card" style="padding: 24px; margin-bottom: 24px; border-top: 5px solid var(--secondary);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <span style="font-family: monospace; font-size: 1.3rem; font-weight: 800; color: var(--secondary);">
+          {{ grievance.reference }}
+        </span>
+        <div style="display: flex; gap: 6px;">
+          <span class="badge badge-status-{{ grievance.status.lower().replace(' ', '-') }}">
+            {{ grievance.status }}
+          </span>
+          <span class="badge badge-priority-{{ grievance.priority.lower() }}">
+            {{ grievance.priority }}
+          </span>
+        </div>
+      </div>
+
+      <h1 style="font-size: 1.3rem; color: var(--text-main); margin-top: 0; margin-bottom: 12px;">
+        {{ grievance.subject }}
+      </h1>
+
+      <p style="font-size: 0.95rem; line-height: 1.6; background: #f8fafc; padding: 14px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 18px;">
+        {{ grievance.description }}
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; margin-bottom: 18px;">
+        <div><strong>Category:</strong> {{ grievance.category }}</div>
+        <div><strong>Ward:</strong> {{ grievance.area }}</div>
+        <div><strong>Landmark:</strong> {{ grievance.landmark or 'Not provided' }}</div>
+        <div><strong>Citizen Name:</strong> {{ grievance.name or 'Anonymous' }}</div>
+        <div><strong>Contact:</strong> {{ grievance.contact or 'None' }}</div>
+        <div><strong>Submitted:</strong> {{ grievance.formatted_created }}</div>
+      </div>
+
+      {% if grievance.attachment_path %}
+        <div style="padding: 12px 14px; background: #ebf8ff; border: 1px solid #bee3f8; border-radius: 6px; font-size: 0.9rem;">
+          &#128206; <strong>Citizen Attachment:</strong>
+          <a href="/uploads/{{ grievance.attachment_path }}" target="_blank" style="margin-left: 6px; font-weight: 600;">
+            Download / View Attachment &rarr;
+          </a>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Status History -->
+    <div class="card" style="padding: 24px;">
+      <h2 style="font-size: 1.15rem; color: var(--secondary); margin-top: 0; margin-bottom: 16px;">
+        Status & Review History
+      </h2>
+      <div class="timeline" role="region" aria-label="Status History Timeline">
+        {% for h in history %}
+          <div class="timeline-item {% if loop.last %}active{% endif %}">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="badge badge-status-{{ h.status.lower().replace(' ', '-') }}">{{ h.status }}</span>
+              <span class="timeline-time">{{ h.formatted_time }}</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">by <strong>{{ h.changed_by }}</strong></span>
+            </div>
+            {% if h.note %}
+              <div class="timeline-note">{{ h.note }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Staff Action Form -->
+  <div class="card" style="padding: 24px; position: sticky; top: 80px; border-top: 5px solid var(--primary);">
+    <h2 style="font-size: 1.2rem; color: var(--secondary); margin-top: 0; margin-bottom: 8px;">
+      Staff Processing Action
+    </h2>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">
+      Update grievance status, adjust priority, or append an official progress note.
+    </p>
+
+    <form action="/admin/grievance/{{ grievance.id }}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+      <div class="form-group">
+        <label for="new_status">Status</label>
+        <select id="new_status" name="new_status" class="form-control" required>
+          {% for st in valid_statuses %}
+            <option value="{{ st }}" {% if grievance.status == st %}selected{% endif %}>{{ st }}</option>
+          {% endfor %}
+        </select>
+        <div class="field-hint">Workflow: Submitted &rarr; Under Review &rarr; In Progress &rarr; Resolved / Rejected</div>
+      </div>
+
+      <div class="form-group">
+        <label for="new_priority">Priority</label>
+        <select id="new_priority" name="new_priority" class="form-control" required>
+          {% for p in valid_priorities %}
+            <option value="{{ p }}" {% if grievance.priority == p %}selected{% endif %}>{{ p }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="new_category">Category</label>
+        <select id="new_category" name="new_category" class="form-control" required>
+          {% for c in categories %}
+            <option value="{{ c }}" {% if grievance.category == c %}selected{% endif %}>{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="staff_note">Staff Review Note</label>
+        <textarea id="staff_note" name="staff_note" class="form-control" rows="4" placeholder="Detail action taken, field squad dispatched, or reasoning for status update..." required></textarea>
+        <div class="field-hint">This note will be recorded in the citizen-visible status timeline.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+        &#10004; Save & Append History
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

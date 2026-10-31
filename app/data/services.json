@@ -1,0 +1,673 @@
+[
+  {
+    "id": 1,
+    "slug": "birth-certificate",
+    "category": "Municipal",
+    "department": "Department of Municipal Administration & Urban Development",
+    "name_en": "Birth Certificate Issuance",
+    "name_hi": "जन्म प्रमाण पत्र जारी करना",
+    "name_te": "జనన ధృవీకరణ పత్రం జారీ",
+    "desc_en": "Apply for an official birth certificate for births registered within municipal corporation limits.",
+    "desc_hi": "नगर निगम सीमा के भीतर पंजीकृत जन्मों के लिए आधिकारिक जन्म प्रमाण पत्र हेतु आवेदन करें।",
+    "desc_te": "మున్సిపల్ కార్పొరేషన్ పరిధిలో నమోదైన జననాల కోసం అధికారిక జనన ధృవీకరణ పత్రం కొరకు దరఖాస్తు చేసుకోండి.",
+    "eligibility": "Parents or legal guardians of children born within municipal limits; registration within 21 days is free.",
+    "documents_json": [
+      "Hospital Discharge Summary / Form 1",
+      "Parents ID Proof (Aadhaar / Voter ID)",
+      "Marriage Certificate of Parents",
+      "Address Proof"
+    ],
+    "steps_json": [
+      "Submit online application or visit citizen service center",
+      "Upload hospital verification slip and parental ID copies",
+      "Verification by Registrar of Births and Deaths",
+      "Download digitally signed certificate or collect hard copy"
+    ],
+    "fees": "Free within 21 days; Rs. 30 late fee up to 1 year; Rs. 50 with Magistrate order after 1 year",
+    "processing_time": "7 to 10 working days",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-08-15",
+    "is_sample": 1
+  },
+  {
+    "id": 2,
+    "slug": "drinking-water-connection",
+    "category": "Water Supply",
+    "department": "Municipal Water Supply and Sewerage Board",
+    "name_en": "New Domestic Drinking Water Connection",
+    "name_hi": "नया घरेलू पेयजल कनेक्शन",
+    "name_te": "కొత్త గృహ తాగునీటి కనెక్షన్",
+    "desc_en": "Request a metered piped drinking water connection for residential buildings and apartments.",
+    "desc_hi": "आवासीय भवनों और अपार्टमेंटों के लिए मीटरयुक्त पाइपयुक्त पेयजल कनेक्शन का अनुरोध करें।",
+    "desc_te": "నివాస గృహాలు మరియు అపార్ట్‌మెంట్ల కొరకు పైపుల ద్వారా మీటర్డ్ తాగునీటి కనెక్షన్ దరఖాస్తు.",
+    "eligibility": "Property owners or authorized tenants with property tax receipts within piped network coverage area.",
+    "documents_json": [
+      "Proof of Ownership / Sale Deed",
+      "Latest Property Tax Assessment Receipt",
+      "Approved Building Plan / Sanction Letter",
+      "Neighbour Water Consumer No (for pipeline reference)"
+    ],
+    "steps_json": [
+      "Submit application with municipal property index number",
+      "Technical site inspection by junior engineer within 5 days",
+      "Pay connection estimate and meter security charges",
+      "Road cutting permission and pipeline tapping execution",
+      "Meter installation and water supply commencement"
+    ],
+    "fees": "Application fee Rs. 250; Connection estimate based on pipe size and distance",
+    "processing_time": "15 to 21 working days",
+    "source_name": "Sample Municipal Water Portal",
+    "source_url": "https://example.gov.in/sample/water-board",
+    "last_reviewed": "2026-07-20",
+    "is_sample": 1
+  },
+  {
+    "id": 3,
+    "slug": "electricity-meter-connection",
+    "category": "Electricity",
+    "department": "State Electricity Distribution Corporation",
+    "name_en": "New Domestic Electricity Connection (LT)",
+    "name_hi": "नया घरेलू बिजली कनेक्शन (एलटी)",
+    "name_te": "కొత్త గృహ విద్యుత్ కనెక్షన్ (ఎల్టీ)",
+    "desc_en": "Application for low-tension single-phase or three-phase domestic electric power supply and smart meter.",
+    "desc_hi": "लो-टेंशन सिंगल-फेज या थ्री-फेज घरेलू बिजली आपूर्ति और स्मार्ट मीटर हेतु आवेदन।",
+    "desc_te": "సింగిల్ ఫేజ్ లేదా త్రీ ఫేజ్ గృహ విద్యుత్ సరఫరా మరియు స్మార్ట్ మీటర్ కొరకు దరఖాస్తు.",
+    "eligibility": "Owner or lawful occupant of residential premises with internal wiring completion test report.",
+    "documents_json": [
+      "Ownership proof (Sale Deed / Partition Deed / Gift Deed)",
+      "Licensed Electrical Contractor Wiring Completion Certificate",
+      "Identity Proof of Applicant",
+      "Passport size photograph"
+    ],
+    "steps_json": [
+      "Submit LT power connection form online",
+      "Verification of premises and load feasibility by Section Officer",
+      "Issuance of Demand Notice for Development and Security Charges",
+      "Payment confirmation and meter dispatch to field squad",
+      "Service line erection, meter installation and power energisation"
+    ],
+    "fees": "Security deposit Rs. 1,200 (1 kW single-phase); service connection charges Rs. 500",
+    "processing_time": "7 working days where no network extension is needed",
+    "source_name": "MyGov India",
+    "source_url": "https://mygov.in",
+    "last_reviewed": "2026-09-01",
+    "is_sample": 1
+  },
+  {
+    "id": 4,
+    "slug": "driving-licence-renewal",
+    "category": "Transport",
+    "department": "Regional Transport Office (RTO)",
+    "name_en": "Driving Licence Renewal",
+    "name_hi": "ड्राइविंग लाइसेंस का नवीनीकरण",
+    "name_te": "డ్రైవింగ్ లైసెన్స్ పునరుద్ధరణ",
+    "desc_en": "Renew expired non-transport (private) or transport commercial driving licences online.",
+    "desc_hi": "समाप्त हो चुके गैर-परिवहन (निजी) या परिवहन वाणिज्यिक ड्राइविंग लाइसेंस को ऑनलाइन नवीनीकृत करें।",
+    "desc_te": "గడువు ముగిసిన ప్రైవేట్ లేదా రవాణా కమర్షియల్ డ్రైవింగ్ లైసెన్స్ ఆన్‌లైన్ పునరుద్ధరణ.",
+    "eligibility": "Holders of valid or expired Indian driving licence (within grace period or up to 1 year for standard renewal).",
+    "documents_json": [
+      "Existing Driving Licence card",
+      "Form 1 Self-Declaration or Form 1A Medical Certificate (for age 40+)",
+      "Address proof if address changed"
+    ],
+    "steps_json": [
+      "Enter driving licence number and date of birth on transport portal",
+      "Fill renewal details and upload medical fitness certificate if aged 40+",
+      "Pay renewal fee and biometric verification charge",
+      "Book slot for biometric capture if photo/signature refresh required",
+      "Smart card driving licence dispatched by speed post"
+    ],
+    "fees": "Rs. 200 standard renewal + Rs. 200 smart card fee; Rs. 300 additional late fee per year of delay",
+    "processing_time": "5 to 7 working days after verification",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-06-10",
+    "is_sample": 1
+  },
+  {
+    "id": 5,
+    "slug": "income-certificate",
+    "category": "Revenue & Land",
+    "department": "Revenue and Land Administration Department",
+    "name_en": "Income & Asset Certificate",
+    "name_hi": "आय एवं संपत्ति प्रमाण पत्र",
+    "name_te": "ఆదాయ ధృవీకరణ పత్రం",
+    "desc_en": "Government certificate certifying annual household income for education scholarships and welfare subsidies.",
+    "desc_hi": "शिक्षा छात्रवृत्ति और कल्याणकारी योजनाओं हेतु वार्षिक पारिवारिक आय प्रमाणित करने वाला सरकारी प्रमाण पत्र।",
+    "desc_te": "విద్యా స్కాలర్‌షిప్‌లు మరియు సంక్షేమ పథకాల కోసం వార్షిక కుటుంబ ఆదాయ ధృవీకరణ పత్రం.",
+    "eligibility": "Resident citizens whose family income is assessed by local revenue village officer / tahsildar.",
+    "documents_json": [
+      "Salary Slips / Form 16 / ITR or Village Administrative Officer Income Enquiry Report",
+      "Ration Card or Family Head declaration",
+      "Electricity bill or rent agreement"
+    ],
+    "steps_json": [
+      "Apply via citizen portal with family details and financial year",
+      "Field enquiry and verification by Village Revenue Officer (VRO)",
+      "Review and recommendation by Revenue Inspector (RI)",
+      "Digital signature and approval by Tahsildar / Deputy Tahsildar",
+      "Download digitally verifiable certificate with QR code"
+    ],
+    "fees": "Rs. 45 user charge at digital citizen counters",
+    "processing_time": "14 working days",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-08-01",
+    "is_sample": 1
+  },
+  {
+    "id": 6,
+    "slug": "police-lost-document-report",
+    "category": "Police Non-Emergency",
+    "department": "State Police Non-Emergency Citizen Services",
+    "name_en": "Police E-Lost Report (Non-Emergency)",
+    "name_hi": "पुलिस ई-लॉस्ट रिपोर्ट (गैर-आपातकालीन)",
+    "name_te": "పోలీస్ ఈ-లాస్ట్ రిపోర్ట్ (నాన్-ఎమర్జెన్సీ)",
+    "desc_en": "Lodge an online lost report for missing documents (PAN, Passport, Cheque books, Certificates) or mobile phones without visiting a police station.",
+    "desc_hi": "थाने जाए बिना गुम हुए दस्तावेजों (पैन, पासपोर्ट, चेक बुक, प्रमाण पत्र) या मोबाइल फोन के लिए ऑनलाइन गुमशुदगी रिपोर्ट दर्ज करें।",
+    "desc_te": "పోలీస్ స్టేషన్‌కు వెళ్లకుండా పోయిన పత్రాలు (పాన్, పాస్‌పోర్ట్, చెక్ బుక్, సర్టిఫికెట్లు) లేదా మొబైల్ కొరకు ఆన్‌లైన్ మిస్సింగ్ రిపోర్ట్ నమోదు.",
+    "eligibility": "Any individual who has lost personal articles or documents within jurisdiction where no cognizable crime or violence is alleged.",
+    "documents_json": [
+      "Identity proof of complainant",
+      "Serial numbers / document numbers of missing items (e.g., IMEI for phone, certificate roll no)"
+    ],
+    "steps_json": [
+      "Submit complainant details, incident location, and item details online",
+      "Verify mobile number via one-time SMS verification",
+      "System generates digitally signed Lost Report acknowledgement PDF instantly",
+      "Use acknowledgement to apply for duplicate documents at issuing authorities"
+    ],
+    "fees": "Completely free of charge",
+    "processing_time": "Instant digital generation (5 minutes)",
+    "source_name": "MyGov India",
+    "source_url": "https://mygov.in",
+    "last_reviewed": "2026-09-10",
+    "is_sample": 1
+  },
+  {
+    "id": 7,
+    "slug": "ration-card-family-addition",
+    "category": "Food & Civil Supplies",
+    "department": "Department of Consumer Affairs, Food & Civil Supplies",
+    "name_en": "Ration Card Member Addition",
+    "name_hi": "राशन कार्ड में सदस्य जोड़ना",
+    "name_te": "రేషన్ కార్డులో కుటుంబ సభ్యుల చేరిక",
+    "desc_en": "Add newborn babies or newlywed spouses to an existing food security ration card database.",
+    "desc_hi": "मौजूदा खाद्य सुरक्षा राशन कार्ड में नवजात शिशुओं या नवविवाहित जीवनसाथी का नाम जोड़ें।",
+    "desc_te": "ప్రస్తుత ఆహార భద్రతా రేషన్ కార్డులో నవజాత శిశువులు లేదా కొత్తగా పెళ్లయిన జీవిత భాగస్వామి పేరు నమోదు.",
+    "eligibility": "Existing active ration cardholder families with proof of relationship.",
+    "documents_json": [
+      "Original Ration Card copy",
+      "Birth certificate (for child) OR Marriage certificate & Deletion certificate from previous card (for spouse)",
+      "Aadhaar Card of newly added member"
+    ],
+    "steps_json": [
+      "Fill member addition request form on civil supplies portal",
+      "Upload supporting relationship documents and biometrics consent",
+      "Verification by Civil Supplies Inspector / Mandal Revenue Office",
+      "Card database updated and revised e-Ration card available for print"
+    ],
+    "fees": "Rs. 20 citizen service fee",
+    "processing_time": "15 to 20 working days",
+    "source_name": "Sample Civil Supplies Portal",
+    "source_url": "https://example.gov.in/sample/civil-supplies",
+    "last_reviewed": "2026-07-15",
+    "is_sample": 1
+  },
+  {
+    "id": 8,
+    "slug": "old-age-pension-scheme",
+    "category": "Social Welfare & Pensions",
+    "department": "Department of Social Security and Women & Child Development",
+    "name_en": "Senior Citizen Social Security Pension",
+    "name_hi": "वरिष्ठ नागरिक सामाजिक सुरक्षा पेंशन",
+    "name_te": "వృద్ధాప్య సాంఘిక భద్రత పెన్షన్",
+    "desc_en": "Monthly financial pension assistance disbursed to elderly destitute citizens from low-income households.",
+    "desc_hi": "कम आय वाले परिवारों के निराश्रित बुजुर्ग नागरिकों को दिया जाने वाला मासिक वित्तीय पेंशन सहयोग।",
+    "desc_te": "తక్కువ ఆదాయం కలిగిన నిరుపేద వృద్ధులకు ప్రతి నెలా అందించే ఆర్థిక పింఛను సహాయం.",
+    "eligibility": "Citizens aged 60 years or above belonging to Below Poverty Line (BPL) families without steady alternative financial support.",
+    "documents_json": [
+      "Proof of Age (Birth Certificate / School Leaving / Voter ID)",
+      "BPL White Ration Card",
+      "Bank Account Passbook seeded with Aadhaar",
+      "Self-declaration of family income"
+    ],
+    "steps_json": [
+      "Submit pension application at local ward secretarial office or portal",
+      "Physical verification of age and living condition by social welfare worker",
+      "Sanction order approved by District Collector / Social Welfare Officer",
+      "Direct Benefit Transfer (DBT) credit to bank account every month"
+    ],
+    "fees": "Free service",
+    "processing_time": "30 to 45 working days",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-08-25",
+    "is_sample": 1
+  },
+  {
+    "id": 9,
+    "slug": "property-tax-mutation",
+    "category": "Municipal",
+    "department": "Revenue Section, Municipal Corporation",
+    "name_en": "Property Tax Title Transfer & Mutation",
+    "name_hi": "संपत्ति कर नामांतरण एवं दाखिल-खारिज",
+    "name_te": "ఆస్తి పన్ను పేరు మార్పిడి (మ్యుటేషన్)",
+    "desc_en": "Transfer of property ownership records in municipal tax registers following sale, inheritance, gift, or court decree.",
+    "desc_hi": "बिक्री, विरासत, उपहार या अदालती डिक्री के बाद नगरपालिका कर रजिस्टरों में संपत्ति स्वामित्व का नामांतरण।",
+    "desc_te": "క్రయవిక్రయం, వారసత్వం లేదా గిఫ్ట్ డీడ్ తర్వాత మున్సిపల్ పన్ను రికార్డులలో ఆస్తి యాజమాన్య హక్కుల బదిలీ.",
+    "eligibility": "New owner or legal successor of land or building situated within municipal bounds.",
+    "documents_json": [
+      "Registered Sale Deed / Gift Deed / Will & Death Certificate",
+      "Latest Paid Property Tax Receipt",
+      "Encumbrance Certificate (EC) for 15 years",
+      "Building plan sanctioned copy"
+    ],
+    "steps_json": [
+      "Submit mutation application on municipal web portal",
+      "Payment of mutation fee (percentage of registered property value)",
+      "Public notice issuance (15-day objection period)",
+      "Scrutiny by municipal revenue inspector and verification of site",
+      "Issuance of new Property Assessment Book and mutated tax demand"
+    ],
+    "fees": "0.1% of registered value or minimum Rs. 500",
+    "processing_time": "21 to 30 working days",
+    "source_name": "Sample Municipal Portal",
+    "source_url": "https://example.gov.in/sample/municipal-services",
+    "last_reviewed": "2026-05-18",
+    "is_sample": 1
+  },
+  {
+    "id": 10,
+    "slug": "trade-licence-issuance",
+    "category": "Municipal",
+    "department": "Health and Sanitation Wing, Municipal Corporation",
+    "name_en": "Commercial Trade Licence Issuance",
+    "name_hi": "व्यापार लाइसेंस जारी करना",
+    "name_te": "వాణిజ్య ట్రేడ్ లైసెన్స్ జారీ",
+    "desc_en": "Statutory permission for operating commercial shops, hotels, factories, and clinics within urban local boundaries.",
+    "desc_hi": "शहरी स्थानीय सीमाओं के भीतर वाणिज्यिक दुकानों, होटलों, कारखानों और क्लीनिकों के संचालन हेतु वैधानिक अनुमति।",
+    "desc_te": "పట్టణ పరిధిలో దుకాణాలు, హోటళ్ళు, కర్మాగారాలు నిర్వహించడానికి చట్టబద్ధమైన ట్రేడ్ లైసెన్స్ అనుమతి.",
+    "eligibility": "Business proprietors, partnership firms, or corporate entities occupying commercial premises.",
+    "documents_json": [
+      "Lease / Rental Agreement or Property Tax Receipt of Shop",
+      "Business Identity / GSTIN / PAN",
+      "Fire Safety NOC (for hazardous trades / restaurants)",
+      "Pollution Control Consent (for manufacturing)"
+    ],
+    "steps_json": [
+      "Select trade category and enter business square footage",
+      "Upload premises rental deed and fire clearance if applicable",
+      "Inspection by municipal sanitary inspector within 7 days",
+      "Online fee payment as per municipal schedule of rates",
+      "Download QR-coded Trade Licence certificate"
+    ],
+    "fees": "Rs. 1,000 to Rs. 15,000 based on area and nature of trade",
+    "processing_time": "10 to 14 working days",
+    "source_name": "Sample Municipal Portal",
+    "source_url": "https://example.gov.in/sample/municipal-services",
+    "last_reviewed": "2026-06-30",
+    "is_sample": 1
+  },
+  {
+    "id": 11,
+    "slug": "street-light-repair",
+    "category": "Municipal",
+    "department": "Electrical Wing, Urban Local Body",
+    "name_en": "Street Light Maintenance & Repair",
+    "name_hi": "स्ट्रीट लाइट मरम्मत एवं रखरखाव",
+    "name_te": "వీధి దీపాల మరమ్మత్తు మరియు నిర్వహణ",
+    "desc_en": "Report non-functional streetlights, blinking LED fixtures, or broken poles in public residential lanes.",
+    "desc_hi": "सार्वजनिक आवासीय गलियों में खराब स्ट्रीट लाइट, टिमटिमाती एलईडी या टूटे खंभों की मरम्मत की सूचना दें।",
+    "desc_te": "వీధుల్లో వెలగని లైట్లు, మినుకుమినుకుమనే ఎల్ఈడీ బల్బులు లేదా విరిగిన స్తంభాల మరమ్మత్తు సమాచారం.",
+    "eligibility": "Any citizen or neighborhood association reporting public streetlight issues.",
+    "documents_json": [
+      "Pole identification number (painted on pole)",
+      "Exact landmark / colony name"
+    ],
+    "steps_json": [
+      "File complaint with ward number and nearest pole number",
+      "Automated assignment to designated area electrical junior engineer",
+      "Field lineman inspection and component replacement",
+      "Closing notification sent with repair photo confirmation"
+    ],
+    "fees": "Zero fee (Free municipal service)",
+    "processing_time": "24 to 48 hours",
+    "source_name": "MyGov India",
+    "source_url": "https://mygov.in",
+    "last_reviewed": "2026-09-12",
+    "is_sample": 1
+  },
+  {
+    "id": 12,
+    "slug": "sewerage-blockage-clearance",
+    "category": "Water Supply",
+    "department": "Municipal Sewerage Drainage Division",
+    "name_en": "Public Underground Sewerage Blockage Clearance",
+    "name_hi": "भूमिगत सीवरेज चोक एवं जल निकासी सफाई",
+    "name_te": "భూగర్భ మురుగు కాలువల పూడికతీత మరియు క్లియరెన్స్",
+    "desc_en": "Request high-velocity jetting machines or suction tankers to clear choked underground sewer lines and overflowing manholes.",
+    "desc_hi": "चोक भूमिगत सीवर लाइनों और उफनते मैनहोलों को साफ करने के लिए जेटिंग मशीनों या सक्शन टैंकरों का अनुरोध करें।",
+    "desc_te": "పూడుకుపోయిన అండర్‌గ్రౌండ్ మురుగు లైన్లు మరియు పొంగిపొర్లుతున్న మ్యాన్‌హోల్స్ క్లియర్ చేయడానికి జెట్టింగ్ మిషన్ల అభ్యర్థన.",
+    "eligibility": "Residents or commercial establishments facing municipal drainage overflow.",
+    "documents_json": [
+      "No documents required; ward name and nearby landmark needed"
+    ],
+    "steps_json": [
+      "Log emergency sewer distress ticket with ward address",
+      "Sewerage subdivision supervisor dispatches suction jetting vehicle",
+      "Mechanical clearance of manhole and clearing of obstruction",
+      "Disinfection spraying and complaint resolution"
+    ],
+    "fees": "Free of charge for public street lines",
+    "processing_time": "12 to 24 hours",
+    "source_name": "Sample Municipal Water Portal",
+    "source_url": "https://example.gov.in/sample/water-board",
+    "last_reviewed": "2026-08-10",
+    "is_sample": 1
+  },
+  {
+    "id": 13,
+    "slug": "mother-child-immunization-card",
+    "category": "Health",
+    "department": "Directorate of Public Health & Family Welfare",
+    "name_en": "Mother & Child Health (MCH) Immunization Registration",
+    "name_hi": "मातृ एवं शिशु स्वास्थ्य टीकाकरण पंजीकरण",
+    "name_te": "తల్లి మరియు శిశు ఆరోగ్య టీకా నమోదు",
+    "desc_en": "Register pregnant women and infants for complete universal immunization schedule and nutritional tracking.",
+    "desc_hi": "पूर्ण सार्वभौमिक टीकाकरण कार्यक्रम और पोषण संबंधी निगरानी के लिए गर्भवती महिलाओं और शिशुओं का पंजीकरण।",
+    "desc_te": "సమగ్ర రోగనిరోధక టీకాల షెడ్యూల్ మరియు పౌష్టికాహార పర్యవేక్షణ కొరకు గర్భిణులు, శిశువుల నమోదు.",
+    "eligibility": "Expectant mothers and all infants residing within the health sub-center or primary health center jurisdiction.",
+    "documents_json": [
+      "Mother Aadhaar ID",
+      "Husband ID proof",
+      "Address proof / Ration Card"
+    ],
+    "steps_json": [
+      "Visit primary health center (PHC) or register with accredited social health activist (ASHA)",
+      "Entry into reproductive and child health tracking database",
+      "Issuance of MCP (Mother-Child Protection) physical handbook and digital RCH ID",
+      "Automated SMS alerts for upcoming vaccination dates (BCG, Polio, Pentavalent, Measles)"
+    ],
+    "fees": "Completely free of charge including all vaccines and iron-folic acid supplements",
+    "processing_time": "Same-day issuance at Primary Health Center",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-07-28",
+    "is_sample": 1
+  },
+  {
+    "id": 14,
+    "slug": "rte-school-admission",
+    "category": "Education",
+    "department": "Department of School Education",
+    "name_en": "RTE 25% Free Quota Private School Admission",
+    "name_hi": "आरटीई 25% निःशुल्क निजी स्कूल प्रवेश",
+    "name_te": "ఆర్టీఈ 25% ప్రైవేట్ పాఠశాలల ఉచిత ప్రవేశాలు",
+    "desc_en": "Admission under Right to Education (RTE) Act Section 12(1)(c) for children from disadvantaged groups in private unaided schools.",
+    "desc_hi": "निजी गैर-सहायता प्राप्त स्कूलों में वंचित और कमजोर वर्ग के बच्चों के लिए शिक्षा का अधिकार (आरटीई) अधिनियम के तहत प्रवेश।",
+    "desc_te": "నిరుపేద, వెనుకబడిన వర్గాల పిల్లలకు ప్రైవేట్ పాఠశాలల్లో 25 శాతం ఉచిత సీట్ల కొరకు విద్యా హక్కు చట్టం దరఖాస్తు.",
+    "eligibility": "Children entering Class 1 or Pre-Primary whose family income is below Rs. 1.5 Lakhs or belonging to SC/ST/disadvantaged categories.",
+    "documents_json": [
+      "Child Birth Certificate",
+      "Income Certificate issued by Tahsildar",
+      "Caste Certificate (if applicable)",
+      "Parent Residential Address proof within 1-3 km of school"
+    ],
+    "steps_json": [
+      "Register on State RTE admissions web portal during annual admission window",
+      "Select up to 5 neighborhood private unaided schools",
+      "Verification of submitted documents by District Education Officer",
+      "Randomized computer lottery for seat allotment",
+      "Report to allotted school for fee-exempt enrollment"
+    ],
+    "fees": "Free application; 100% tuition fee covered by government",
+    "processing_time": "Annual admission schedule (lottery results declared within 15 days of closing)",
+    "source_name": "MyGov India",
+    "source_url": "https://mygov.in",
+    "last_reviewed": "2026-06-15",
+    "is_sample": 1
+  },
+  {
+    "id": 15,
+    "slug": "senior-citizen-bus-concession",
+    "category": "Transport",
+    "department": "State Road Transport Corporation (RTC)",
+    "name_en": "Senior Citizen Bus Travel Concession Pass",
+    "name_hi": "वरिष्ठ नागरिक बस यात्रा रियायत पास",
+    "name_te": "సీనియర్ సిటిజన్ బస్సు ప్రయాణ రాయితీ పాస్",
+    "desc_en": "Concessional bus travel smart card granting 25% to 50% discount on suburban and rural bus transport.",
+    "desc_hi": "उपनगरीय और ग्रामीण बस परिवहन पर 25% से 50% की छूट प्रदान करने वाला रियायती स्मार्ट कार्ड।",
+    "desc_te": "నగర మరియు పల్లె వెలుగు బస్సులలో 25% నుండి 50% రాయితీ పొందేందుకు సీనియర్ సిటిజన్ స్మార్ట్ పాస్.",
+    "eligibility": "Citizens aged 60 years and above residing within the transport operational territory.",
+    "documents_json": [
+      "Proof of Date of Birth (Aadhaar / Voter ID / Passport)",
+      "Recent passport size photograph",
+      "Address proof"
+    ],
+    "steps_json": [
+      "Fill RTC bus pass concession form online or at major depot counters",
+      "Present original age proof for physical verification",
+      "Pay smart card manufacturing fee",
+      "Collect laminated smart card or save digital pass on smartphone"
+    ],
+    "fees": "Rs. 100 for 1-year laminated RFID smart pass",
+    "processing_time": "Instant across RTC counter or 3 days online",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-08-05",
+    "is_sample": 1
+  },
+  {
+    "id": 16,
+    "slug": "death-certificate",
+    "category": "Municipal",
+    "department": "Department of Municipal Administration & Urban Development",
+    "name_en": "Death Certificate Issuance",
+    "name_hi": "मृत्यु प्रमाण पत्र जारी करना",
+    "name_te": "మరణ ధృవీకరణ పత్రం జారీ",
+    "desc_en": "Official registration and certificate of death occurring within urban corporation limits.",
+    "desc_hi": "शहरी निगम सीमा के भीतर हुई मृत्यु का आधिकारिक पंजीकरण और प्रमाण पत्र।",
+    "desc_te": "మున్సిపల్ కార్పొరేషన్ పరిధిలో జరిగిన మరణాల అధికారిక నమోదు మరియు సర్టిఫికెట్ జారీ.",
+    "eligibility": "Immediate family members, hospital representatives, or legal heirs.",
+    "documents_json": [
+      "Hospital Death Summary / Form 2 from Medical Officer",
+      "Burial / Cremation Ground Receipt",
+      "Deceased Aadhaar / Voter ID copy",
+      "Applicant relationship proof"
+    ],
+    "steps_json": [
+      "Submit Form 2 along with cremation receipt to Municipal Health Officer",
+      "Verification against burial ground register records",
+      "Entry into Civil Registration System (CRS)",
+      "Download digitally verifiable certificate with security QR code"
+    ],
+    "fees": "Free if registered within 21 days; nominal search fee of Rs. 30 thereafter",
+    "processing_time": "5 to 7 working days",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-07-10",
+    "is_sample": 1
+  },
+  {
+    "id": 17,
+    "slug": "caste-community-certificate",
+    "category": "Revenue & Land",
+    "department": "Revenue and Land Administration Department",
+    "name_en": "Caste & Community Certificate",
+    "name_hi": "जाति एवं समुदाय प्रमाण पत्र",
+    "name_te": "కుల ధృవీకరణ పత్రం",
+    "desc_en": "Official certification of social category (SC, ST, BC, OBC) for educational quotas and statutory reservations.",
+    "desc_hi": "शैक्षिक कोटा और वैधानिक आरक्षण के लिए सामाजिक श्रेणी (एससी, एसटी, बीसी, ओबीसी) का आधिकारिक प्रमाणीकरण।",
+    "desc_te": "విద్యా ప్రవేశాలు, ఉద్యోగ రిజర్వేషన్ల ప్రయోజనాల కోసం అధికారిక కుల ధృవీకరణ పత్రం.",
+    "eligibility": "Citizens belonging to notified communities with historical lineage within the state.",
+    "documents_json": [
+      "Father / Mother / Sibling Caste Certificate copy",
+      "School Transfer Certificate showing caste",
+      "Family lineage genealogical tree declaration",
+      "Ration Card or Voter ID"
+    ],
+    "steps_json": [
+      "Apply via digital citizen portal with ancestral revenue details",
+      "Field inquiry conducted by Village Revenue Officer",
+      "Report submitted to Revenue Inspector and Mandal Tehsildar",
+      "Approval and digital signing of barcoded caste certificate"
+    ],
+    "fees": "Rs. 45 processing fee at citizen service centers",
+    "processing_time": "15 to 30 working days",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-08-18",
+    "is_sample": 1
+  },
+  {
+    "id": 18,
+    "slug": "disability-pension-scheme",
+    "category": "Social Welfare & Pensions",
+    "department": "Department for Empowerment of Persons with Disabilities",
+    "name_en": "Divyangjan Disability Pension Assistance",
+    "name_hi": "दिव्यांगजन पेंशन सहायता",
+    "name_te": "దివ్యాంగుల పింఛను సహాయం",
+    "desc_en": "Monthly financial subsistence grant for persons with certified permanent physical or intellectual disabilities.",
+    "desc_hi": "प्रमाणित स्थायी शारीरिक या बौद्धिक दिव्यांगता वाले व्यक्तियों के लिए मासिक वित्तीय अनुदान।",
+    "desc_te": "శాశ్వత శారీరక లేదా మానసిక వైకల్యం కలిగిన వారికి ప్రభుత్వం అందించే నెలవారీ ఆర్థిక భరోసా.",
+    "eligibility": "Persons having 40% or higher disability as certified by a recognized Medical Board.",
+    "documents_json": [
+      "Unique Disability ID (UDID) Card or District Medical Board Certificate",
+      "Bank Account Details linked with Aadhaar",
+      "Proof of Residence",
+      "Passport size photograph showing disability"
+    ],
+    "steps_json": [
+      "Register on social welfare portal with UDID number",
+      "Validation of medical board percentage against national UDID registry",
+      "Approval by District Welfare Officer",
+      "Monthly pension credit directly to applicant's Aadhaar-enabled bank account"
+    ],
+    "fees": "Zero fee (Free public welfare benefit)",
+    "processing_time": "30 working days",
+    "source_name": "MyGov India",
+    "source_url": "https://mygov.in",
+    "last_reviewed": "2026-09-05",
+    "is_sample": 1
+  },
+  {
+    "id": 19,
+    "slug": "building-plan-sanction",
+    "category": "Municipal",
+    "department": "Town Planning Section, Urban Development Authority",
+    "name_en": "Residential Building Plan Approval",
+    "name_hi": "आवासीय भवन निर्माण योजना स्वीकृति",
+    "name_te": "నివాస గృహ నిర్మాణ అనుమతి (బిల్డింగ్ ప్లాన్)",
+    "desc_en": "Online building permission and sanction for constructing or modifying residential houses up to 3 floors.",
+    "desc_hi": "3 मंजिलों तक के आवासीय मकानों के निर्माण या संशोधन हेतु ऑनलाइन भवन निर्माण अनुमति।",
+    "desc_te": "మూడు అంతస్తుల వరకు ఇళ్ల నిర్మాణం లేదా పునరుద్ధరణ కొరకు ఆన్‌లైన్ భవన నిర్మాణ ప్రణాళిక అనుమతి.",
+    "eligibility": "Plot owners possessing registered clear-title plot deeds located in approved layouts.",
+    "documents_json": [
+      "Registered Title Deed",
+      "CAD Drawing Building Plan signed by licensed architect",
+      "Encumbrance Certificate (EC)",
+      "Latest Land Tax Assessment"
+    ],
+    "steps_json": [
+      "Upload AutoCAD architectural plan to auto-scrutiny building portal",
+      "Automated building by-law validation (setbacks, height, FAR)",
+      "Site inspection by municipal town planning officer",
+      "Pay building permit fee and development charges online",
+      "Instant download of approved sanction drawing and permit order"
+    ],
+    "fees": "Calculated by built-up square area (approx Rs. 50 to Rs. 150 per sq. meter)",
+    "processing_time": "15 to 21 working days",
+    "source_name": "Sample Municipal Portal",
+    "source_url": "https://example.gov.in/sample/municipal-services",
+    "last_reviewed": "2026-06-25",
+    "is_sample": 1
+  },
+  {
+    "id": 20,
+    "slug": "agriculture-electricity-subsidy",
+    "category": "Electricity",
+    "department": "State Electricity Regulatory & Distribution Utility",
+    "name_en": "Agricultural Pump-Set Free Electricity Scheme",
+    "name_hi": "कृषि पंपसेट निःशुल्क बिजली योजना",
+    "name_te": "వ్యవసాయ పంపుసెట్ల ఉచిత విద్యుత్ పథకం",
+    "desc_en": "Subsidized or free 7-to-9 hour daytime agricultural power supply for farmers operating irrigation borewells.",
+    "desc_hi": "सिंचाई बोरवेल चलाने वाले किसानों के लिए 7 से 9 घंटे की सब्सिडीयुक्त या मुफ्त दिन की कृषि बिजली आपूर्ति।",
+    "desc_te": "వ్యవసాయ బోర్లకు పగటిపూట 7 నుండి 9 గంటల ఉచిత లేదా రాయితీ విద్యుత్ సరఫరా పథకం.",
+    "eligibility": "Small and marginal farmers holding agricultural land title with operational irrigation borewell/well.",
+    "documents_json": [
+      "Pattadar Passbook / Land Revenue Record (RoR 1B)",
+      "Groundwater Authority Borewell Feasibility Clearance",
+      "Electricity Distribution Service Connection application"
+    ],
+    "steps_json": [
+      "Submit agricultural tariff application through local rural power office",
+      "Feasibility check of distribution transformer capacity by divisional engineer",
+      "Installation of agricultural meter / capacitor and designated line connection",
+      "Inclusion in zero-tariff agriculture subsidy billing cycle"
+    ],
+    "fees": "Subsidized application fee Rs. 100",
+    "processing_time": "30 to 45 working days",
+    "source_name": "National Government Services Portal",
+    "source_url": "https://india.gov.in",
+    "last_reviewed": "2026-07-02",
+    "is_sample": 1
+  },
+  {
+    "id": 21,
+    "slug": "garbage-collection-hotspot",
+    "category": "Municipal",
+    "department": "Solid Waste Management Wing, Municipal Corporation",
+    "name_en": "Garbage Vulnerable Point Clearance & Door-to-Door Service",
+    "name_hi": "कचरा संवेदनशील स्थल सफाई एवं डोर-टू-डोर सेवा",
+    "name_te": "చెత్త సేకరణ మరియు రోడ్లపై చెత్త డంపింగ్ క్లియరెన్స్",
+    "desc_en": "Request special municipal sanitation tippers for clearing street garbage piles or missing door-to-door waste collection.",
+    "desc_hi": "सड़क पर कचरे के ढेर हटाने या घर-घर कचरा संग्रहण न होने पर विशेष सफाई वाहन का अनुरोध करें।",
+    "desc_te": "వీధుల్లో పేరుకుపోయిన చెత్తను తొలగించడానికి మరియు ఇంటింటి చెత్త సేకరణ సమస్యల పరిష్కార సేవ.",
+    "eligibility": "Any resident within municipal corporation wards reporting solid waste issues.",
+    "documents_json": [
+      "Exact street location / GPS pin / landmark"
+    ],
+    "steps_json": [
+      "File solid waste clearance request with landmark and ward number",
+      "Dispatch of compact tipper truck or mechanized sweeper",
+      "Removal of waste and lime powder disinfection spraying",
+      "Ticket closed with post-cleanup timestamped photograph"
+    ],
+    "fees": "Free public civic service",
+    "processing_time": "12 to 24 hours",
+    "source_name": "MyGov India",
+    "source_url": "https://mygov.in",
+    "last_reviewed": "2026-09-18",
+    "is_sample": 1
+  },
+  {
+    "id": 22,
+    "slug": "water-pipeline-leakage-repair",
+    "category": "Water Supply",
+    "department": "Transmission & Distribution Wing, Water Board",
+    "name_en": "Main Drinking Water Pipeline Leakage Repair",
+    "name_hi": "मुख्य पेयजल पाइपलाइन रिसाव मरम्मत",
+    "name_te": "ప్రధాన తాగునీటి పైపులైన్ లీకేజీ మరమ్మత్తు",
+    "desc_en": "Emergency repair of bursting or leaking underground municipal potable water supply conduits and valves.",
+    "desc_hi": "फटने या रिसने वाली भूमिगत नगरपालिका पेयजल आपूर्ति पाइपों और वाल्वों की आपातकालीन मरम्मत।",
+    "desc_te": "రోడ్లపై పగిలిన లేదా లీక్ అవుతున్న మున్సిపల్ ప్రధాన తాగునీటి పైపులైన్ అత్యవసర మరమ్మత్తు.",
+    "eligibility": "Public civic alert open to any citizen noticing road water waste.",
+    "documents_json": [
+      "Location landmark and approximate leak severity"
+    ],
+    "steps_json": [
+      "Emergency grievance logged on water board control room",
+      "Valve isolation to prevent potable water loss",
+      "Excavation and pipe welding / collar joint clamp installation",
+      "Water pressure test and road surface restoration"
+    ],
+    "fees": "Free emergency repair service",
+    "processing_time": "6 to 12 hours",
+    "source_name": "Sample Municipal Water Portal",
+    "source_url": "https://example.gov.in/sample/water-board",
+    "last_reviewed": "2026-08-30",
+    "is_sample": 1
+  }
+]

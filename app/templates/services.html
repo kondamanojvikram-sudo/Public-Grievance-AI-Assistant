@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('nav_services', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 24px;">
+  <h1 style="font-size: 1.8rem; margin: 0 0 8px; color: var(--secondary);">{{ t('nav_services', lang) }}</h1>
+  <p style="color: var(--text-muted); margin: 0;">Verified citizen guide directory for municipal, revenue, utilities, transport, and welfare services.</p>
+</div>
+
+<!-- Search Bar -->
+<form action="/services" method="GET" class="search-form-row">
+  {% if selected_category %}
+    <input type="hidden" name="category" value="{{ selected_category }}">
+  {% endif %}
+  <label for="service-search-input" class="sr-only" style="position: absolute; left: -9999px;">Search Services</label>
+  <input type="text" id="service-search-input" name="q" value="{{ search_query }}" class="search-input" placeholder="{{ t('search_services_placeholder', lang) }}">
+  <button type="submit" class="btn btn-primary">{{ t('nav_services', lang) }}</button>
+  {% if search_query or selected_category %}
+    <a href="/services" class="btn btn-outline" style="align-self: center;">Reset</a>
+  {% endif %}
+</form>
+
+<!-- Category Filter Chips -->
+<div class="chips-container" role="region" aria-label="Category Filters">
+  <a href="/services{% if search_query %}?q={{ search_query }}{% endif %}" class="chip {% if not selected_category %}active{% endif %}">
+    {{ t('all_categories', lang) }}
+  </a>
+  {% for cat in all_categories %}
+    <a href="/services?category={{ cat }}{% if search_query %}&q={{ search_query }}{% endif %}" class="chip {% if selected_category == cat %}active{% endif %}">
+      {{ cat }}
+    </a>
+  {% endfor %}
+</div>
+
+<!-- Services Count -->
+<div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+  Showing <strong>{{ services|length }}</strong> services
+  {% if selected_category %} in category <strong>{{ selected_category }}</strong>{% endif %}
+  {% if search_query %} matching "<em>{{ search_query }}</em>"{% endif %}
+</div>
+
+<!-- Services Grid -->
+{% if services %}
+  <div class="cards-grid">
+    {% for s in services %}
+      <div class="card">
+        <div class="card-meta">
+          <span class="badge badge-category">{{ s.category }}</span>
+          <span class="badge badge-sample">{{ t('sample_badge', lang) }}</span>
+        </div>
+        <h2 class="card-title" style="font-size: 1.15rem;">
+          <a href="/services/{{ s.slug }}" style="text-decoration: none; color: inherit;">
+            {% if lang == 'hi' %}{{ s.name_hi }}
+            {% elif lang == 'te' %}{{ s.name_te }}
+            {% else %}{{ s.name_en }}{% endif %}
+          </a>
+        </h2>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+          <strong>{{ t('department', lang) }}:</strong> {{ s.department }}
+        </div>
+        <p class="card-body">
+          {% if lang == 'hi' %}{{ s.desc_hi }}
+          {% elif lang == 'te' %}{{ s.desc_te }}
+          {% else %}{{ s.desc_en }}{% endif %}
+        </p>
+        <div class="card-footer">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">{{ t('last_reviewed', lang) }}: {{ s.formatted_date }}</span>
+          <a href="/services/{{ s.slug }}" class="btn btn-sm btn-outline">{{ t('view_details', lang) }} &rarr;</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card" style="padding: 40px; text-align: center;">
+    <h3 style="color: var(--secondary);">No services matched your search criteria.</h3>
+    <p style="color: var(--text-muted);">Try a different keyword or reset filters, or ask the AI assistant.</p>
+    <div style="margin-top: 16px; display: flex; justify-content: center; gap: 12px;">
+      <a href="/services" class="btn btn-primary">Clear Filters</a>
+      <a href="/chat" class="btn btn-secondary">Ask AI Assistant</a>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

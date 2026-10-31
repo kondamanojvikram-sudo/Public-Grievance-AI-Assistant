@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('chat_title', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 850px; margin: 0 auto 16px;">
+  <h1 style="font-size: 1.8rem; margin: 0 0 6px; color: var(--secondary);">{{ t('chat_title', lang) }}</h1>
+  <p style="color: var(--text-muted); margin: 0;">{{ t('chat_subtitle', lang) }}</p>
+</div>
+
+<div class="chat-window" role="region" aria-label="Interactive Civic Chat Assistant">
+  <!-- Messages Stream -->
+  <div id="chat-messages" class="chat-messages" aria-live="polite">
+    <div class="chat-bubble bot">
+      <div style="margin-bottom: 6px;">
+        <span class="badge badge-category">AI ASSISTANT</span>
+        <span class="badge badge-sample">{{ t('sample_badge', lang) }}</span>
+      </div>
+      <div>
+        {% if lang == 'hi' %}
+          नमस्ते! मैं आपका सार्वजनिक शिकायत एआई सहायक हूँ। आप मुझसे जन्म/मृत्यु प्रमाण पत्र, पेयजल, बिजली, पेंशन, राशन या परिवहन सेवाओं के बारे में प्रश्न पूछ सकते हैं।
+        {% elif lang == 'te' %}
+          నమస్కారం! నేను మీ ప్రజా సమస్యల పరిష్కార ఏఐ సహాయకుడిని. జనన/మరణ ధృవీకరణ పత్రాలు, నీరు, విద్యుత్, పెన్షన్లు, రేషన్ లేదా రవాణా సేవల గురించి మీరు నన్ను అడగవచ్చు.
+        {% else %}
+          Hello! I am your Public Grievance AI Assistant. You can ask me questions about birth/death certificates, water supply, electricity meters, pensions, ration cards, transport, or report a civic issue.
+        {% endif %}
+      </div>
+      <div class="chat-disclaimer">
+        {{ t('chat_disclaimer', lang) }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggestion Chips -->
+  <div class="chat-suggestions" role="group" aria-label="Suggested Questions">
+    <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); align-self: center;">Suggested:</span>
+    {% for q in suggested_questions %}
+      <button type="button" class="chat-chip">{{ q }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- Chat Input Bar -->
+  <form id="chat-form" class="chat-input-bar">
+    <label for="chat-input" class="sr-only" style="position: absolute; left: -9999px;">Type your message</label>
+    <input type="text" id="chat-input" class="chat-input" maxlength="500" placeholder="{{ t('chat_placeholder', lang) }}" autocomplete="off" required>
+
+    <button type="button" id="mic-btn" class="btn btn-outline" style="padding: 10px 14px; display: none;" title="{{ t('chat_voice', lang) }}" aria-label="{{ t('chat_voice', lang) }}">
+      &#127908;
+    </button>
+
+    <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">
+      {{ t('chat_send', lang) }} &#10148;
+    </button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/chat.js"></script>
+{% endblock %}

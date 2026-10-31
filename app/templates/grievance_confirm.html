@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Grievance Submitted - {{ grievance.reference }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 750px; margin: 20px auto;">
+  <!-- Mandatory Demo System Banner -->
+  <div class="alert-banner alert-warning" role="region" aria-label="Demo System Notification" style="font-size: 1.05rem; font-weight: 700; border-left-width: 8px;">
+    &#9888; {{ t('submission_demo_banner', lang) }}
+  </div>
+
+  {% if warning_banner %}
+    <div class="alert-banner alert-info" role="region" aria-label="Similar Request Notice">
+      {{ warning_banner }}
+    </div>
+  {% endif %}
+
+  <div class="card" style="padding: 32px; text-align: center; border-top: 6px solid var(--primary);">
+    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 12px;" aria-hidden="true">&#9989;</div>
+    <h1 style="font-size: 1.8rem; margin: 0 0 8px; color: var(--secondary);">Grievance Successfully Registered</h1>
+    <p style="color: var(--text-muted); margin: 0 0 24px;">Your civic complaint has been logged in the local system database with the reference identifier below.</p>
+
+    <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: var(--radius); padding: 20px; margin-bottom: 28px; display: inline-block; min-width: 320px;">
+      <span style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px;">{{ t('reference_number', lang) }}</span>
+      <strong style="font-size: 1.8rem; color: var(--secondary); letter-spacing: 1px; font-family: monospace;">{{ grievance.reference }}</strong>
+    </div>
+
+    <div style="text-align: left; background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px; margin-bottom: 28px; font-size: 0.95rem;">
+      <h2 style="font-size: 1.1rem; color: var(--secondary); margin-top: 0; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">Submission Summary</h2>
+      <div style="margin-bottom: 8px;"><strong>Subject:</strong> {{ grievance.subject }}</div>
+      <div style="margin-bottom: 8px;"><strong>Category:</strong> <span class="badge badge-category">{{ grievance.category }}</span></div>
+      <div style="margin-bottom: 8px;"><strong>Ward / Area:</strong> {{ grievance.area }}</div>
+      {% if grievance.landmark %}
+        <div style="margin-bottom: 8px;"><strong>Landmark:</strong> {{ grievance.landmark }}</div>
+      {% endif %}
+      <div style="margin-bottom: 8px;"><strong>Initial Status:</strong> <span class="badge badge-status-submitted">{{ grievance.status }}</span></div>
+      <div><strong>Submitted On:</strong> {{ grievance.formatted_created }}</div>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+      <a href="/track?ref={{ grievance.reference }}" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem;">
+        &#128269; {{ t('track_now', lang) }} &rarr;
+      </a>
+      <a href="/grievance/new" class="btn btn-outline">
+        Submit Another Grievance
+      </a>
+      <a href="/" class="btn btn-outline">
+        Return to Home
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

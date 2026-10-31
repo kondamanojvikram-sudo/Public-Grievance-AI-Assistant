@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('admin_queue_title', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+  <div>
+    <h1 style="font-size: 1.8rem; margin: 0 0 6px; color: var(--secondary);">{{ t('admin_queue_title', lang) }}</h1>
+    <p style="color: var(--text-muted); margin: 0;">Administrative queue for civic grievances, departmental forwarding, and status updates.</p>
+  </div>
+  <div>
+    <span class="badge" style="background: #e0e7ff; color: #3730a3; padding: 6px 12px; font-size: 0.85rem;">
+      Staff Officer: {{ user.name }}
+    </span>
+  </div>
+</div>
+
+<!-- Analytics Overview with Pure CSS Bars (No external JS chart libraries) -->
+<section class="analytics-grid" aria-labelledby="analytics-heading">
+  <div class="analytics-card">
+    <h2 id="analytics-heading" style="font-size: 1.1rem; color: var(--secondary); margin-top: 0; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px;">
+      Grievances by Status (Total: {{ total_grievances }})
+    </h2>
+    {% for st in valid_statuses %}
+      {% set cnt = status_counts.get(st, 0) %}
+      {% set pct = (cnt * 100 / total_grievances)|round(1) %}
+      <div class="analytics-bar-row">
+        <div class="analytics-bar-label">
+          <span>{{ st }}</span>
+          <span><strong>{{ cnt }}</strong> ({{ pct }}%)</span>
+        </div>
+        <div class="analytics-bar-track">
+          <div class="analytics-bar-fill status-{{ st.lower().replace(' ', '-') }}" style="width: {{ pct }}%;"></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="analytics-card">
+    <h2 style="font-size: 1.1rem; color: var(--secondary); margin-top: 0; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px;">
+      Top Categories
+    </h2>
+    {% for cat in category_counts[:5] %}
+      {% set pct = (cat.cnt * 100 / total_grievances)|round(1) %}
+      <div class="analytics-bar-row">
+        <div class="analytics-bar-label">
+          <span>{{ cat.category }}</span>
+          <span><strong>{{ cat.cnt }}</strong></span>
+        </div>
+        <div class="analytics-bar-track">
+          <div class="analytics-bar-fill" style="width: {{ pct }}%;"></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Filter & Search Toolbar -->
+<div class="card" style="padding: 20px; margin-bottom: 24px;">
+  <form action="/admin" method="GET" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end;">
+    <div>
+      <label for="filter-status" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Status</label>
+      <select id="filter-status" name="status" class="form-control" style="padding: 8px;">
+        <option value="">All Statuses</option>
+        {% for s in valid_statuses %}
+          <option value="{{ s }}" {% if current_status == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="filter-category" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Category</label>
+      <select id="filter-category" name="category" class="form-control" style="padding: 8px;">
+        <option value="">All Categories</option>
+        {% for c in categories %}
+          <option value="{{ c }}" {% if current_category == c %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="filter-area" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Ward / Area</label>
+      <select id="filter-area" name="area" class="form-control" style="padding: 8px;">
+        <option value="">All Wards</option>
+        {% for w in wards %}
+          <option value="{{ w }}" {% if current_area == w %}selected{% endif %}>{{ w }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="sort" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Sort By</label>
+      <select id="sort" name="sort" class="form-control" style="padding: 8px;">
+        <option value="date_desc" {% if current_sort == 'date_desc' %}selected{% endif %}>Newest First</option>
+        <option value="date_asc" {% if current_sort == 'date_asc' %}selected{% endif %}>Oldest First</option>
+        <option value="priority" {% if current_sort == 'priority' %}selected{% endif %}>Highest Priority</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="search-q" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Search Keyword / Ref</label>
+      <input type="text" id="search-q" name="q" value="{{ search_query }}" class="form-control" style="padding: 8px;" placeholder="e.g. GRV or pipeline...">
+    </div>
+
+    <div style="display: flex; gap: 8px;">
+      <button type="submit" class="btn btn-primary" style="flex: 1; padding: 8px 14px;">Apply</button>
+      <a href="/admin" class="btn btn-outline" style="padding: 8px 14px;">Reset</a>
+    </div>
+  </form>
+</div>
+
+<!-- Queue Table -->
+<div style="margin-bottom: 12px; font-size: 0.9rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+  <span>Showing <strong>{{ grievances|length }}</strong> of <strong>{{ total_matching }}</strong> matching grievances</span>
+  <span>Page {{ current_page }} of {{ total_pages }}</span>
+</div>
+
+{% if grievances %}
+  <div class="table-responsive">
+    <table class="queue-table">
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Subject & Description</th>
+          <th>Category</th>
+          <th>Ward</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Submitted</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for g in grievances %}
+          <tr>
+            <td>
+              <strong style="font-family: monospace; font-size: 0.95rem;">{{ g.reference }}</strong>
+              {% if g.attachment_path %}
+                <span title="Attachment included" aria-label="Attachment included">&#128206;</span>
+              {% endif %}
+            </td>
+            <td>
+              <div style="font-weight: 700; color: var(--secondary); max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ g.subject }}
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ g.description }}
+              </div>
+            </td>
+            <td><span class="badge badge-category">{{ g.category }}</span></td>
+            <td style="font-size: 0.85rem;">{{ g.area }}</td>
+            <td>
+              <span class="badge badge-priority-{{ g.priority.lower() }}">
+                {{ g.priority }}
+              </span>
+            </td>
+            <td>
+              <span class="badge badge-status-{{ g.status.lower().replace(' ', '-') }}">
+                {{ g.status }}
+              </span>
+            </td>
+            <td style="font-size: 0.8rem; color: var(--text-muted);">{{ g.formatted_created }}</td>
+            <td>
+              <a href="/admin/grievance/{{ g.id }}" class="btn btn-sm btn-primary">
+                Review &rarr;
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  {% if total_pages > 1 %}
+    <div style="display: flex; justify-content: center; gap: 8px; margin-top: 24px;">
+      {% if current_page > 1 %}
+        <a href="/admin?page={{ current_page - 1 }}&status={{ current_status }}&category={{ current_category }}&area={{ current_area }}&sort={{ current_sort }}&q={{ search_query }}" class="btn btn-sm btn-outline">&larr; Previous</a>
+      {% endif %}
+      <span style="align-self: center; font-size: 0.9rem; font-weight: 600;">Page {{ current_page }} of {{ total_pages }}</span>
+      {% if current_page < total_pages %}
+        <a href="/admin?page={{ current_page + 1 }}&status={{ current_status }}&category={{ current_category }}&area={{ current_area }}&sort={{ current_sort }}&q={{ search_query }}" class="btn btn-sm btn-outline">Next &rarr;</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% else %}
+  <div class="card" style="padding: 40px; text-align: center;">
+    <h3 style="color: var(--secondary);">No grievances match the specified filters.</h3>
+    <p style="color: var(--text-muted);">Try resetting filters or clearing the search query.</p>
+    <div style="margin-top: 14px;">
+      <a href="/admin" class="btn btn-primary">Reset Filters</a>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

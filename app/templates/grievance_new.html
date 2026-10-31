@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('file_grievance_title', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto 20px;">
+  <h1 style="font-size: 1.8rem; margin: 0 0 6px; color: var(--secondary);">{{ t('file_grievance_title', lang) }}</h1>
+  <p style="color: var(--text-muted); margin: 0;">{{ t('file_grievance_subtitle', lang) }}</p>
+</div>
+
+<!-- Privacy Alert Notice -->
+<div class="alert-banner alert-warning" style="max-width: 800px; margin: 0 auto 24px;">
+  <strong>&#128274; {{ t('privacy_notice', lang) }}</strong>
+</div>
+
+{% if errors %}
+  <div class="alert-banner alert-danger" style="max-width: 800px; margin: 0 auto 24px;" role="alert" aria-live="assertive">
+    <strong>Please correct the following errors:</strong>
+    <ul style="margin: 6px 0 0; padding-left: 20px;">
+      {% for field, msg in errors.items() %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+<div class="form-card">
+  <!-- Wizard Step Indicators (Enhanced with JS) -->
+  <div class="wizard-steps" role="tablist" aria-label="Grievance Form Steps">
+    <div class="wizard-step wizard-step-indicator active" id="step-ind-1">
+      {{ t('step_1', lang) }}
+    </div>
+    <div class="wizard-step wizard-step-indicator" id="step-ind-2">
+      {{ t('step_2', lang) }}
+    </div>
+    <div class="wizard-step wizard-step-indicator" id="step-ind-3">
+      {{ t('step_3', lang) }}
+    </div>
+    <div class="wizard-step wizard-step-indicator" id="step-ind-4">
+      {{ t('step_4', lang) }}
+    </div>
+  </div>
+
+  <form id="grievance-form" action="/grievance/new" method="POST" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <!-- STEP 1: Details -->
+    <fieldset class="wizard-step-section" id="step-sec-1">
+      <legend style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 16px;">
+        {{ t('step_1', lang) }}
+      </legend>
+
+      <div class="form-group {% if errors.category %}has-error{% endif %}">
+        <label for="category">{{ t('category', lang) }} <span style="color: #c53030;">*</span></label>
+        <select id="category" name="category" class="form-control" required>
+          <option value="">-- Select Category --</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}" {% if form_data.category == cat or request.query_params.get('category') == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+        {% if errors.category %}
+          <div class="field-error" role="alert">{{ errors.category }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group {% if errors.subject %}has-error{% endif %}">
+        <label for="subject">{{ t('subject_label', lang) }} <span style="color: #c53030;">*</span></label>
+        <input type="text" id="subject" name="subject" value="{{ form_data.subject|default('') }}" class="form-control" minlength="5" maxlength="120" placeholder="e.g. Broken water pipeline causing waterlogging" required>
+        <div class="field-hint">{{ t('subject_help', lang) }}</div>
+        {% if errors.subject %}
+          <div class="field-error" role="alert">{{ errors.subject }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group {% if errors.description %}has-error{% endif %}">
+        <label for="description">{{ t('description_label', lang) }} <span style="color: #c53030;">*</span></label>
+        <textarea id="description" name="description" class="form-control" rows="5" minlength="20" maxlength="2000" placeholder="Provide detailed information regarding the issue..." required>{{ form_data.description|default('') }}</textarea>
+        <div class="field-hint">{{ t('description_help', lang) }}</div>
+        {% if errors.description %}
+          <div class="field-error" role="alert">{{ errors.description }}</div>
+        {% endif %}
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+        <button type="button" class="btn btn-primary btn-wizard-next">{{ t('next', lang) }} &rarr;</button>
+      </div>
+    </fieldset>
+
+    <!-- STEP 2: Location -->
+    <fieldset class="wizard-step-section" id="step-sec-2">
+      <legend style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 16px;">
+        {{ t('step_2', lang) }}
+      </legend>
+
+      <div class="form-group {% if errors.area %}has-error{% endif %}">
+        <label for="area">{{ t('area_label', lang) }} <span style="color: #c53030;">*</span></label>
+        <select id="area" name="area" class="form-control" required>
+          <option value="">{{ t('select_area', lang) }}</option>
+          {% for w in wards %}
+            <option value="{{ w }}" {% if form_data.area == w %}selected{% endif %}>{{ w }}</option>
+          {% endfor %}
+        </select>
+        {% if errors.area %}
+          <div class="field-error" role="alert">{{ errors.area }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="landmark">{{ t('landmark_label', lang) }}</label>
+        <input type="text" id="landmark" name="landmark" value="{{ form_data.landmark|default('') }}" class="form-control" maxlength="200" placeholder="e.g. Opposite Community Hall, Near Pole #14">
+        <div class="field-hint">Helps the field squad pinpoint the site quickly.</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <button type="button" class="btn btn-outline btn-wizard-prev">&larr; {{ t('prev', lang) }}</button>
+        <button type="button" class="btn btn-primary btn-wizard-next">{{ t('next', lang) }} &rarr;</button>
+      </div>
+    </fieldset>
+
+    <!-- STEP 3: Contact & Attachment -->
+    <fieldset class="wizard-step-section" id="step-sec-3">
+      <legend style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 16px;">
+        {{ t('step_3', lang) }}
+      </legend>
+
+      <div class="form-group">
+        <label for="name">{{ t('name_label', lang) }}</label>
+        <input type="text" id="name" name="name" value="{{ form_data.name|default(user.name if user else '') }}" class="form-control" maxlength="100" placeholder="Enter your full name or leave blank for anonymous">
+        <div class="field-hint">You may submit anonymously if you prefer.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="contact">{{ t('contact_label', lang) }}</label>
+        <input type="text" id="contact" name="contact" value="{{ form_data.contact|default(user.email if user else '') }}" class="form-control" maxlength="100" placeholder="e.g. citizen@example.com or mobile number">
+        <div class="field-hint">Used only for status notifications regarding this request.</div>
+      </div>
+
+      <div class="form-group {% if errors.attachment %}has-error{% endif %}">
+        <label for="attachment">{{ t('attachment_label', lang) }}</label>
+        <input type="file" id="attachment" name="attachment" class="form-control" accept=".pdf,.png,.jpg,.jpeg">
+        <div class="field-hint">Optional photographic or documentary proof (max 2 MB).</div>
+        {% if errors.attachment %}
+          <div class="field-error" role="alert">{{ errors.attachment }}</div>
+        {% endif %}
+      </div>
+
+      <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <button type="button" class="btn btn-outline btn-wizard-prev">&larr; {{ t('prev', lang) }}</button>
+        <button type="button" class="btn btn-primary btn-wizard-next">{{ t('next', lang) }} &rarr;</button>
+      </div>
+    </fieldset>
+
+    <!-- STEP 4: Review & Submit -->
+    <fieldset class="wizard-step-section" id="step-sec-4">
+      <legend style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 16px;">
+        {{ t('step_4', lang) }}
+      </legend>
+
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 18px; margin-bottom: 20px; font-size: 0.95rem;">
+        <div style="margin-bottom: 8px;"><strong>Category:</strong> <span id="rev-category"></span></div>
+        <div style="margin-bottom: 8px;"><strong>Subject:</strong> <span id="rev-subject"></span></div>
+        <div style="margin-bottom: 8px;"><strong>Description:</strong> <span id="rev-description"></span></div>
+        <div style="margin-bottom: 8px;"><strong>Ward / Area:</strong> <span id="rev-area"></span></div>
+        <div style="margin-bottom: 8px;"><strong>Landmark:</strong> <span id="rev-landmark"></span></div>
+        <div style="margin-bottom: 8px;"><strong>Citizen Name:</strong> <span id="rev-name"></span></div>
+        <div style="margin-bottom: 8px;"><strong>Contact:</strong> <span id="rev-contact"></span></div>
+        <div><strong>Attachment:</strong> <span id="rev-attachment"></span></div>
+      </div>
+
+      <div class="alert-banner alert-info" style="font-size: 0.85rem; margin-bottom: 20px;">
+        <strong>Prototype Acknowledgement:</strong> By submitting, this request will be stored locally in this student demonstration system and given a trackable reference ID.
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <button type="button" class="btn btn-outline btn-wizard-prev">&larr; {{ t('prev', lang) }}</button>
+        <button type="submit" class="btn btn-accent" style="padding: 12px 28px; font-size: 1.05rem;">
+          &#10004; {{ t('submit_grievance', lang) }}
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

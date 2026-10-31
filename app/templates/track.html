@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('track_title', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <div style="margin-bottom: 24px;">
+    <h1 style="font-size: 1.8rem; margin: 0 0 6px; color: var(--secondary);">{{ t('track_title', lang) }}</h1>
+    <p style="color: var(--text-muted); margin: 0;">Enter your grievance reference identifier to inspect real-time progress and departmental actions.</p>
+  </div>
+
+  <!-- Search Form -->
+  <div class="card" style="padding: 24px; margin-bottom: 28px;">
+    <form action="/track" method="GET" style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <label for="ref-input" class="sr-only" style="position: absolute; left: -9999px;">Reference Number</label>
+      <input type="text" id="ref-input" name="ref" value="{{ ref|default('') }}" class="search-input" style="flex: 1; min-width: 250px; font-family: monospace; text-transform: uppercase;" placeholder="{{ t('track_placeholder', lang) }}" required>
+      <button type="submit" class="btn btn-primary" style="padding: 10px 24px;">{{ t('track_btn', lang) }}</button>
+    </form>
+    <div style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+      Sample references to test: <code>GRV-2026-000101</code>, <code>GRV-2026-000102</code>, <code>GRV-2026-000108</code>
+    </div>
+  </div>
+
+  {% if error %}
+    <div class="alert-banner alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
+
+  {% if grievance %}
+    <div class="card" style="padding: 28px; border-top: 5px solid var(--secondary); margin-bottom: 28px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px;">
+        <div>
+          <span style="font-family: monospace; font-size: 1.3rem; font-weight: 800; color: var(--secondary);">{{ grievance.reference }}</span>
+          <span class="badge badge-category" style="margin-left: 8px;">{{ grievance.category }}</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span class="badge badge-status-{{ grievance.status.lower().replace(' ', '-') }}" style="font-size: 0.85rem; padding: 4px 10px;">
+            {{ grievance.status }}
+          </span>
+          <span class="badge badge-priority-{{ grievance.priority.lower() }}">
+            {{ grievance.priority }} Priority
+          </span>
+        </div>
+      </div>
+
+      <h2 style="font-size: 1.25rem; color: var(--text-main); margin-top: 0; margin-bottom: 12px;">
+        {{ grievance.subject }}
+      </h2>
+
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); background: #f8fafc; padding: 14px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+        {{ grievance.description }}
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 0.85rem; margin-bottom: 24px;">
+        <div><strong>Ward / Area:</strong> {{ grievance.area }}</div>
+        <div><strong>Landmark:</strong> {{ grievance.landmark or 'Not provided' }}</div>
+        <div><strong>Submitted:</strong> {{ grievance.formatted_created }}</div>
+        <div><strong>Last Updated:</strong> {{ grievance.formatted_updated }}</div>
+      </div>
+
+      {% if grievance.attachment_path %}
+        <div style="margin-bottom: 24px; padding: 12px 16px; background: #ebf8ff; border-radius: 6px; border: 1px solid #bee3f8; font-size: 0.9rem;">
+          &#128206; <strong>Attachment Available:</strong>
+          <a href="/uploads/{{ grievance.attachment_path }}" target="_blank" style="margin-left: 6px; font-weight: 600;">
+            {{ t('download_attachment', lang) }}
+          </a>
+        </div>
+      {% endif %}
+
+      <!-- Status History Timeline -->
+      <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 16px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+        {{ t('status_timeline', lang) }}
+      </h3>
+
+      {% if history %}
+        <div class="timeline" role="region" aria-label="Grievance Status History">
+          {% for h in history %}
+            <div class="timeline-item {% if loop.last %}active{% endif %}">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-header">
+                <span class="badge badge-status-{{ h.status.lower().replace(' ', '-') }}">
+                  {{ h.status }}
+                </span>
+                <span class="timeline-time">{{ h.formatted_time }}</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">by <strong>{{ h.changed_by }}</strong></span>
+              </div>
+              {% if h.note %}
+                <div class="timeline-note">
+                  {{ h.note }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p style="color: var(--text-muted); font-size: 0.9rem;">{{ t('no_history', lang) }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

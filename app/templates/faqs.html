@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('faqs_title', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 24px;">
+  <h1 style="font-size: 1.8rem; margin: 0 0 8px; color: var(--secondary);">{{ t('faqs_title', lang) }}</h1>
+  <p style="color: var(--text-muted); margin: 0;">{{ t('faqs_subtitle', lang) }}</p>
+</div>
+
+<!-- Search FAQs -->
+<form action="/faqs" method="GET" class="search-form-row">
+  <label for="faq-search-input" class="sr-only" style="position: absolute; left: -9999px;">Search FAQs</label>
+  <input type="text" id="faq-search-input" name="q" value="{{ search_query }}" class="search-input" placeholder="{{ t('search_faqs_placeholder', lang) }}">
+  <button type="submit" class="btn btn-primary">Search</button>
+  {% if search_query %}
+    <a href="/faqs" class="btn btn-outline" style="align-self: center;">Reset</a>
+  {% endif %}
+</form>
+
+{% if search_query %}
+  <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+    Showing results matching "<em>{{ search_query }}</em>"
+  </div>
+{% endif %}
+
+{% if grouped_faqs %}
+  {% for category, faqs in grouped_faqs.items() %}
+    <section class="faq-group" aria-labelledby="cat-heading-{{ loop.index }}">
+      <h2 id="cat-heading-{{ loop.index }}" style="font-size: 1.25rem; color: var(--secondary); margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+        {{ category }}
+      </h2>
+
+      {% for item in faqs %}
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false" id="faq-q-{{ item.id }}">
+            <span>
+              {% if lang == 'hi' %}{{ item.question_hi }}
+              {% elif lang == 'te' %}{{ item.question_te }}
+              {% else %}{{ item.question_en }}{% endif %}
+            </span>
+            <span aria-hidden="true" style="font-size: 1.2rem; margin-left: 10px;">+</span>
+          </button>
+          <div class="faq-answer" role="region" aria-labelledby="faq-q-{{ item.id }}">
+            <p style="margin: 12px 0 10px; line-height: 1.6;">
+              {% if lang == 'hi' %}{{ item.answer_hi }}
+              {% elif lang == 'te' %}{{ item.answer_te }}
+              {% else %}{{ item.answer_en }}{% endif %}
+            </p>
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 8px;">
+              <span>Source: <a href="{{ item.source_url }}" target="_blank" rel="noopener noreferrer">{{ item.source_name }}</a></span>
+              <span>{{ t('last_reviewed', lang) }}: {{ item.formatted_date }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </section>
+  {% endfor %}
+{% else %}
+  <div class="card" style="padding: 40px; text-align: center;">
+    <h3 style="color: var(--secondary);">No FAQs found.</h3>
+    <p style="color: var(--text-muted);">Try a broader query or ask our AI assistant directly.</p>
+    <div style="margin-top: 16px;">
+      <a href="/chat" class="btn btn-primary">Ask AI Assistant</a>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

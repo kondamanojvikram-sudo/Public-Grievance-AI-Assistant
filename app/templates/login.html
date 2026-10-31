@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t('login_title', lang) }} - {{ t('site_title', lang) }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 480px; margin: 40px auto;">
+  <div class="card" style="padding: 32px; border-top: 5px solid var(--secondary);">
+    <h1 style="font-size: 1.6rem; color: var(--secondary); margin: 0 0 8px;">{{ t('login_title', lang) }}</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0 0 20px;">Access your citizen dashboard or staff management queue.</p>
+
+    <!-- Demo Credentials Notice -->
+    <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius); padding: 12px 16px; margin-bottom: 20px; font-size: 0.85rem;">
+      <strong style="color: var(--secondary); display: block; margin-bottom: 4px;">&#128273; Demo Credentials:</strong>
+      <div><strong>Staff:</strong> <code>staff@demo.test</code> / <code>Staff@123</code></div>
+      <div><strong>Citizen:</strong> <code>citizen@demo.test</code> / <code>Citizen@123</code></div>
+    </div>
+
+    {% if error %}
+      <div class="alert-banner alert-danger" role="alert" style="margin-bottom: 16px; font-size: 0.85rem;">
+        {{ error }}
+      </div>
+    {% endif %}
+
+    <form action="/login" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+      <div class="form-group">
+        <label for="email">{{ t('email_label', lang) }}</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{ t('password_label', lang) }}</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 12px;">
+        {{ t('btn_login', lang) }} &rarr;
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+      Don't have an account? <a href="/register">{{ t('btn_register', lang) }}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

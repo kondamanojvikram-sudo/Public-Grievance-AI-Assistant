@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Pytest cache
+.pytest_cache/
+.cache/
+
+# Local SQLite databases
+*.db
+*.db-journal
+*.sqlite3
+app/grievance.db
+
+# User uploads (keep directory with .gitkeep)
+app/uploads/*
+!app/uploads/.gitkeep
+
+# Environment variables & secrets
+.env
+
+# OS / Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

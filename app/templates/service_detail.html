@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if lang == 'hi' %}{{ service.name_hi }}
+  {% elif lang == 'te' %}{{ service.name_te }}
+  {% else %}{{ service.name_en }}{% endif %} - Service Details
+{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 16px;">
+  <a href="/services" style="font-weight: 600; text-decoration: none;">&larr; Back to Services Directory</a>
+</div>
+
+<div class="card" style="padding: 32px; border-top: 5px solid var(--secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+    <div>
+      <span class="badge badge-category" style="margin-right: 8px;">{{ service.category }}</span>
+      <span class="badge badge-sample">{{ t('sample_badge', lang) }}</span>
+      <h1 style="font-size: 1.8rem; margin: 10px 0 6px; color: var(--secondary);">
+        {% if lang == 'hi' %}{{ service.name_hi }}
+        {% elif lang == 'te' %}{{ service.name_te }}
+        {% else %}{{ service.name_en }}{% endif %}
+      </h1>
+      <div style="font-size: 0.95rem; color: var(--text-muted);">
+        <strong>{{ t('department', lang) }}:</strong> {{ service.department }}
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <a href="/grievance/new?category={{ service.category }}" class="btn btn-accent">&#9997; {{ t('btn_file_grievance', lang) }}</a>
+    </div>
+  </div>
+
+  <div class="alert-banner alert-info" style="margin-bottom: 24px;">
+    <strong>Notice:</strong> This is sample civic guidance curated for the demonstration prototype. Official processing guidelines must be verified with the competent administrative authority.
+  </div>
+
+  <!-- Description Section -->
+  <div style="margin-bottom: 24px;">
+    <h2 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 8px;">Overview</h2>
+    <p style="font-size: 1.05rem; line-height: 1.6; margin: 0;">
+      {% if lang == 'hi' %}{{ service.desc_hi }}
+      {% elif lang == 'te' %}{{ service.desc_te }}
+      {% else %}{{ service.desc_en }}{% endif %}
+    </p>
+  </div>
+
+  <!-- Multilingual names box -->
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius); padding: 16px; margin-bottom: 24px;">
+    <strong style="font-size: 0.9rem; color: var(--text-muted); display: block; margin-bottom: 8px;">Multilingual Service Names:</strong>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.9rem;">
+      <div><strong>English:</strong> {{ service.name_en }}</div>
+      <div><strong>हिन्दी:</strong> {{ service.name_hi }}</div>
+      <div><strong>తెలుగు:</strong> {{ service.name_te }}</div>
+    </div>
+  </div>
+
+  <!-- Key Attributes Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 28px;">
+    <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 18px;">
+      <h3 style="font-size: 1.1rem; color: var(--secondary); margin-top: 0; margin-bottom: 10px;">
+        &#9989; {{ t('eligibility', lang) }}
+      </h3>
+      <p style="margin: 0; font-size: 0.95rem;">{{ service.eligibility }}</p>
+    </div>
+
+    <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 18px;">
+      <h3 style="font-size: 1.1rem; color: var(--secondary); margin-top: 0; margin-bottom: 10px;">
+        &#128179; {{ t('fees', lang) }} & {{ t('processing_time', lang) }}
+      </h3>
+      <p style="margin: 0 0 8px; font-size: 0.95rem;"><strong>{{ t('fees', lang) }}:</strong> {{ service.fees }}</p>
+      <p style="margin: 0; font-size: 0.95rem;"><strong>{{ t('processing_time', lang) }}:</strong> {{ service.processing_time }}</p>
+    </div>
+  </div>
+
+  <!-- Required Documents -->
+  <div style="margin-bottom: 28px;">
+    <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 12px;">
+      &#128196; {{ t('required_docs', lang) }}
+    </h3>
+    <ul style="padding-left: 20px; margin: 0; font-size: 0.95rem; line-height: 1.8;">
+      {% for doc in service.documents_list %}
+        <li>{{ doc }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Procedure Steps -->
+  <div style="margin-bottom: 32px;">
+    <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 12px;">
+      &#128203; {{ t('procedure_steps', lang) }}
+    </h3>
+    <ol style="padding-left: 20px; margin: 0; font-size: 0.95rem; line-height: 1.8;">
+      {% for step in service.steps_list %}
+        <li>{{ step }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+
+  <!-- Source & Verification Footer -->
+  <div style="border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.85rem; color: var(--text-muted);">
+    <div>
+      <span>{{ t('last_reviewed', lang) }}: <strong>{{ service.formatted_date }}</strong></span> &bull;
+      <span>Source: <strong>{{ service.source_name }}</strong></span>
+    </div>
+    <div>
+      <a href="{{ service.source_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+        {{ t('open_source', lang) }} &#8599;
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
