@@ -5,7 +5,10 @@ from pathlib import Path
 from datetime import datetime, timezone, timedelta
 from app.auth import hash_password
 
-DB_PATH = Path(os.getenv("DB_PATH", Path(__file__).parent / "grievance.db"))
+if os.getenv("VERCEL"):
+    DB_PATH = Path("/tmp/grievance.db")
+else:
+    DB_PATH = Path(os.getenv("DB_PATH", Path(__file__).resolve().parent / "grievance.db"))
 DATA_DIR = Path(__file__).parent / "data"
 
 def get_db():
